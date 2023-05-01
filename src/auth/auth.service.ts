@@ -75,7 +75,7 @@ export class AuthService {
     id: string;
     username: string;
     email: string;
-    roles: string[];
+    roles: string;
   }) {
     const payload = args;
     return this.jwt.signAsync(payload, { secret: jwtSecret });
