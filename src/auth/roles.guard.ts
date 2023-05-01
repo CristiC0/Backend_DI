@@ -3,6 +3,7 @@ import {
   CanActivate,
   ExecutionContext,
   Logger,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { Role } from './role.enum';
 import { ROLES_KEY } from './roles.decorator';
@@ -23,8 +24,12 @@ export class RolesGuard implements CanActivate {
       return true;
     }
     const req = context.switchToHttp().getRequest<Request>();
-    const { roles } = JSON.parse(atob(req.cookies.token.split('.')[1]));
-
+    let roles;
+    try {
+      roles = (JSON.parse(atob(req.cookies.token?.split('.')[1])) as any).roles;
+    } catch (e) {
+      throw new UnauthorizedException();
+    }
     return requiredRoles.some((role) => roles?.includes(role));
   }
 }

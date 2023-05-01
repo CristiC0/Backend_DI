@@ -24,7 +24,7 @@ export class AuthService {
     await this.prisma.user.create({
       data: { email, lastName, firstName, username, hashedPassword },
     });
-    return { message: 'Everything is good!' };
+    return { message: 'User created!' };
   }
 
   async login(dto: LoginDTO, req: Request, res: Response) {
@@ -48,7 +48,7 @@ export class AuthService {
       id: foundUser.id,
       email: foundUser.email,
       username: foundUser.username,
-      roles: foundUser.roles,
+      role: foundUser.roles,
     });
 
     if (!token) throw new ForbiddenException();
@@ -75,7 +75,7 @@ export class AuthService {
     id: string;
     username: string;
     email: string;
-    roles: string;
+    role: string;
   }) {
     const payload = args;
     return this.jwt.signAsync(payload, { secret: jwtSecret });
