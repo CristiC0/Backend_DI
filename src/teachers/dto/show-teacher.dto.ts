@@ -1,7 +1,8 @@
-import { IsArray, IsString, IsNotEmpty, IsJSON } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { Course } from '@prisma/client';
+import { IsArray, IsString, IsNotEmpty } from 'class-validator';
 
-export class CreateTeacherDto {
+export class ShowTeacherDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
@@ -28,10 +29,10 @@ export class CreateTeacherDto {
   public title: string;
 
   @ApiProperty()
-  @IsJSON()
+  @IsArray()
   public contacts: string;
 
   @ApiProperty()
   @IsArray()
-  public courses: string[];
+  public courses: Course[];
 }

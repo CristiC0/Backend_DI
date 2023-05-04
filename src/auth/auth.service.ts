@@ -48,7 +48,7 @@ export class AuthService {
       id: foundUser.id,
       email: foundUser.email,
       username: foundUser.username,
-      role: foundUser.roles,
+      role: foundUser.role,
     });
 
     if (!token) throw new ForbiddenException();
