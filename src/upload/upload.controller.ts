@@ -53,6 +53,8 @@ export class UploadController {
     @UploadedFile()
     file: Express.Multer.File,
   ) {
-    return { imagePath: join('images', 'teachers', file.originalname) };
+    return {
+      imagePath: `http://localhost:3000/images/teachers/${file.filename}`,
+    };
   }
 }
