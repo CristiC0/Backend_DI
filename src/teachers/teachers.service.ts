@@ -7,13 +7,33 @@ import {
 import { CreateTeacherDto } from './dto/create-teacher.dto';
 import { UpdateTeacherDto } from './dto/update-teacher.dto';
 import { PrismaService } from 'prisma/prisma.service';
+import { User } from 'src/users/entities/user.entity';
+import { Role } from 'src/auth/role.enum';
 @Injectable()
 export class TeachersService {
   constructor(private prisma: PrismaService) {}
   logger = new Logger();
+
   async create(createTeacherDto: CreateTeacherDto) {
-    await this.prisma.teacher.create({
+    let user: User;
+    if (!createTeacherDto.userId) {
+      user = await this.prisma.user.create({
+        data: {
+          email: null,
+          lastName: createTeacherDto.lastName,
+          firstName: createTeacherDto.firstName,
+          username: null,
+          hashedPassword: null,
+          role: Role.TEACHER,
+        },
+      });
+      delete createTeacherDto.lastName;
+      delete createTeacherDto.firstName;
+    }
+
+    const createdTeacher = await this.prisma.teacher.create({
       data: {
+        userId: user.id,
         ...createTeacherDto,
         courses: {
           create: createTeacherDto.courses.reduce((createCourses, id) => {
@@ -21,6 +41,11 @@ export class TeachersService {
           }, []),
         },
       },
+    });
+
+    await this.prisma.teacher.update({
+      where: { id: createdTeacher.id },
+      data: { user: { connect: { id: user.id } } },
     });
     return { message: 'Teacher created' };
   }
