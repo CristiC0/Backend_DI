@@ -26,7 +26,7 @@ export class RolesGuard implements CanActivate {
     const req = context.switchToHttp().getRequest<Request>();
     let roles;
     try {
-      roles = (JSON.parse(atob(req.cookies.token?.split('.')[1])) as any).roles;
+      roles = (JSON.parse(atob(req.cookies.token?.split('.')[1])) as any).role;
     } catch (e) {
       throw new UnauthorizedException();
     }
