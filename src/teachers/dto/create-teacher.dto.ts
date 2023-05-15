@@ -1,11 +1,30 @@
-import { IsArray, IsString, IsNotEmpty, IsJSON } from 'class-validator';
+import {
+  IsArray,
+  IsString,
+  IsNotEmpty,
+  IsJSON,
+  IsOptional,
+} from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateTeacherDto {
+  @IsOptional()
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
   public userId: string;
+
+  @IsOptional()
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  public firstName: string;
+
+  @IsOptional()
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  public lastName: string;
 
   @ApiProperty()
   @IsNotEmpty()
