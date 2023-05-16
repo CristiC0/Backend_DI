@@ -31,6 +31,8 @@ model Teacher {
   title       String
   management  Boolean         @default(false)
   courses     TeacherCourse[]
+  phone       String          @default("")
+  email       String          @default("")
   contacts    Json            @default("null")
 }
 

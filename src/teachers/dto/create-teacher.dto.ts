@@ -4,6 +4,8 @@ import {
   IsNotEmpty,
   IsJSON,
   IsOptional,
+  IsEmail,
+  Matches,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -45,6 +47,18 @@ export class CreateTeacherDto {
   @IsNotEmpty()
   @IsString()
   public title: string;
+
+  @ApiProperty()
+  @IsString()
+  @IsEmail()
+  public email: string;
+
+  @ApiProperty()
+  @IsString()
+  @Matches(/[+0-9].$/, {
+    message: 'Only numbers',
+  })
+  public phone: string;
 
   @ApiProperty()
   @IsJSON()
