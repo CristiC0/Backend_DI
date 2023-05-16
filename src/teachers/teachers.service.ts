@@ -86,7 +86,7 @@ export class TeachersService {
         where: { id },
         include: {
           courses: { select: { course: { select: { name: true } } } },
-          user: { select: { username: true } },
+          user: { select: { username: true, lastName: true, firstName: true } },
         },
       })
       .then((teacher) => {
