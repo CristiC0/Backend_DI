@@ -55,7 +55,7 @@ export class TeachersService {
       .findMany({
         include: {
           courses: { select: { course: true } },
-          user: { select: { username: true } },
+          user: { select: { username: true, lastName: true, firstName: true } },
         },
       })
       .then((teachers) => this.formatTeacherList(teachers));
@@ -74,7 +74,7 @@ export class TeachersService {
         where: { management: managementQuery },
         include: {
           courses: { select: { course: true } },
-          user: { select: { username: true } },
+          user: { select: { username: true, lastName: true, firstName: true } },
         },
       })
       .then((teachers) => this.formatTeacherList(teachers));
