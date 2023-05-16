@@ -53,6 +53,7 @@ export class CreateTeacherDto {
   @IsEmail()
   public email: string;
 
+  @IsOptional()
   @ApiProperty()
   @IsString()
   @Matches(/[+0-9].$/, {
@@ -60,6 +61,7 @@ export class CreateTeacherDto {
   })
   public phone: string;
 
+  @IsOptional()
   @ApiProperty()
   @IsJSON()
   public contacts: string;
