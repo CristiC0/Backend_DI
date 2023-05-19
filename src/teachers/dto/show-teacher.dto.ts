@@ -29,6 +29,26 @@ export class ShowTeacherDto {
   public title: string;
 
   @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  public firstName: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  public lastName: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  public email: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  public phone: string;
+
+  @ApiProperty()
   @IsArray()
   public contacts: string;
 
