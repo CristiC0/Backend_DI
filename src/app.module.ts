@@ -9,6 +9,7 @@ import { UploadModule } from './upload/upload.module';
 import { MulterModule } from '@nestjs/platform-express';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { NewsModule } from './news/news.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { join } from 'path';
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', '..', 'files'),
     }),
+    NewsModule,
   ],
   providers: [
     {
