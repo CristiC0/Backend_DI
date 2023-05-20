@@ -1,6 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'prisma/prisma.service';
-import { disconnect } from 'process';
 import { Role } from 'src/auth/role.enum';
 
 @Injectable()
