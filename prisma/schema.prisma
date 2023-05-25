@@ -28,12 +28,11 @@ model Teacher {
   photo       String
   description String
   biografy    String
-  title       String
+  title       String[]
   management  Boolean         @default(false)
   courses     TeacherCourse[]
   phone       String          @default("")
   email       String          @default("")
-  contacts    Json            @default("null")
 }
 
 model Course {

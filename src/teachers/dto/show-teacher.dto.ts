@@ -25,8 +25,8 @@ export class ShowTeacherDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsString()
-  public title: string;
+  @IsArray()
+  public title: string[];
 
   @ApiProperty()
   @IsNotEmpty()
@@ -47,10 +47,6 @@ export class ShowTeacherDto {
   @IsNotEmpty()
   @IsString()
   public phone: string;
-
-  @ApiProperty()
-  @IsArray()
-  public contacts: string;
 
   @ApiProperty()
   @IsArray()

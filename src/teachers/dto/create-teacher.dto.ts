@@ -45,8 +45,8 @@ export class CreateTeacherDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsString()
-  public title: string;
+  @IsArray()
+  public title: string[];
 
   @ApiProperty()
   @IsString()
@@ -60,11 +60,6 @@ export class CreateTeacherDto {
     message: 'Only numbers',
   })
   public phone: string;
-
-  @IsOptional()
-  @ApiProperty()
-  @IsJSON()
-  public contacts: string;
 
   @ApiProperty()
   @IsArray()
