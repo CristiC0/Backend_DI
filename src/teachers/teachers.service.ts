@@ -103,7 +103,7 @@ export class TeachersService {
       this.deleteAllCoursesConnections(id);
 
     const { userId } = await this.prisma.teacher.findUnique({ where: { id } });
-
+    this.logger.log(userId);
     await this.prisma.user.update({
       data: {
         lastName: updateTeacherDto.lastName,
@@ -138,7 +138,7 @@ export class TeachersService {
   }
 
   formatTeacher(teacher: any) {
-    return {
+    const newTeacher = {
       ...teacher,
       username: teacher.user.username,
       lastname: teacher.user.lastName,
@@ -148,6 +148,8 @@ export class TeachersService {
         [],
       ),
     };
+    delete newTeacher.user;
+    return newTeacher;
   }
 
   formatTeacherList(teachers: any) {
