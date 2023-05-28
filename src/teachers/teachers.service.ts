@@ -102,6 +102,18 @@ export class TeachersService {
     if (updateTeacherDto.hasOwnProperty('courses'))
       this.deleteAllCoursesConnections(id);
 
+    const { userId } = await this.prisma.teacher.findUnique({ where: { id } });
+
+    await this.prisma.user.update({
+      data: {
+        lastName: updateTeacherDto.lastName,
+        firstName: updateTeacherDto.firstName,
+      },
+      where: {
+        id: userId,
+      },
+    });
+
     await this.prisma.teacher.update({
       where: { id },
       data: {
