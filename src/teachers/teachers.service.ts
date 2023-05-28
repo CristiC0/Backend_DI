@@ -114,6 +114,9 @@ export class TeachersService {
       },
     });
 
+    delete updateTeacherDto.lastName;
+    delete updateTeacherDto.firstName;
+
     await this.prisma.teacher.update({
       where: { id },
       data: {
