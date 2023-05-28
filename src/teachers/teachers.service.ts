@@ -141,7 +141,7 @@ export class TeachersService {
     const newTeacher = {
       ...teacher,
       username: teacher.user.username,
-      lastname: teacher.user.lastName,
+      lastName: teacher.user.lastName,
       firstName: teacher.user.firstName,
       courses: teacher.courses.reduce(
         (courses, course) => [...courses, course.course],
