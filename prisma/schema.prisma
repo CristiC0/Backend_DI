@@ -33,18 +33,20 @@ model Teacher {
   courses     TeacherCourse[]
   phone       String          @default("")
   email       String          @default("")
+  Orar        Orar[]
 }
 
 model Course {
   id          String          @id @default(uuid())
   name        String
+  acronym     String          @default("")
   teachers    TeacherCourse[]
-  cycle       String
   photo       String
   description String
   speciality  String[]
   links       String[]
   content     String
+  Orar        Orar[]
 }
 
 model TeacherCourse {
@@ -65,4 +67,27 @@ model News {
   priority  Int
   content   Json
   createdAt DateTime @default(now()) @db.Timestamptz()
+}
+
+model Orar {
+  id        String   @id @default(uuid())
+  time      String
+  day       Int
+  type      String?
+  group     Group    @relation(fields: [groupId], references: [id])
+  groupId   String
+  course    Course?  @relation(fields: [courseId], references: [id])
+  courseId  String?
+  room      String?
+  teacher   Teacher? @relation(fields: [teacherId], references: [id])
+  teacherId String?
+  week      Int      @default(0)
+}
+
+model Group {
+  id    String @id @default(uuid())
+  name  String
+  year  Int
+  cycle Int
+  Orar  Orar[]
 }

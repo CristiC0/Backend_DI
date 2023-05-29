@@ -10,6 +10,8 @@ import { MulterModule } from '@nestjs/platform-express';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { NewsModule } from './news/news.module';
+import { ScheduleModule } from './schedule/schedule.module';
+import { CoursesModule } from './courses/courses.module';
 
 @Module({
   imports: [
@@ -23,6 +25,8 @@ import { NewsModule } from './news/news.module';
       rootPath: join(__dirname, '..', '..', 'files'),
     }),
     NewsModule,
+    ScheduleModule,
+    CoursesModule,
   ],
   providers: [
     {
