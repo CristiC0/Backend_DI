@@ -12,6 +12,7 @@ import { join } from 'path';
 import { NewsModule } from './news/news.module';
 import { ScheduleModule } from './schedule/schedule.module';
 import { CoursesModule } from './courses/courses.module';
+import { GroupsModule } from './groups/groups.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { CoursesModule } from './courses/courses.module';
     NewsModule,
     ScheduleModule,
     CoursesModule,
+    GroupsModule,
   ],
   providers: [
     {
