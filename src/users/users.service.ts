@@ -1,15 +1,19 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'prisma/prisma.service';
 import { Role } from 'src/auth/role.enum';
+import { UpdateUserDto } from './dto/update-user';
+import { AuthService } from 'src/auth/auth.service';
 
 @Injectable()
 export class UsersService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private authService: AuthService,
+  ) {}
 
   async getUser(id: string) {
     const user = await this.prisma.user.findUnique({ where: { id } });
     if (!user) throw new NotFoundException();
-
     delete user.hashedPassword;
     return user;
   }
@@ -22,8 +26,27 @@ export class UsersService {
         firstName: true,
         username: true,
         email: true,
+        role: true,
       },
     });
+  }
+
+  async updateUser(id: string, body: UpdateUserDto) {
+    if (body?.password) {
+      const hashedPassword = await this.authService.hashPassword(body.password);
+      delete body.password;
+      await this.prisma.user.update({
+        where: { id },
+        data: { ...body, hashedPassword },
+      });
+    } else {
+      await this.prisma.user.update({
+        where: { id },
+        data: { ...body },
+      });
+    }
+
+    return { message: 'User updated!' };
   }
 
   async deleteUser(id: string) {

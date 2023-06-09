@@ -27,7 +27,7 @@ export class NewsService {
   async findAll() {
     const news = await this.prisma.news
       .findMany({
-        include: { author: { select: { username: true } } },
+        include: { author: { select: { username: true, id: true } } },
       })
       .then((news) => this.formatNewsList(news));
     return news;
@@ -48,6 +48,7 @@ export class NewsService {
       where: { id },
       data: { ...updateNewsDto },
     });
+
     return { message: 'News updated!' };
   }
 
@@ -63,7 +64,11 @@ export class NewsService {
 
   formatNewsList = (news: any) => {
     return news.map((currentNews) => {
-      const newNews = { ...currentNews, author: currentNews.author.username };
+      const newNews = {
+        ...currentNews,
+        author: currentNews.author.username,
+        authorId: currentNews.author.id,
+      };
       return newNews;
     });
   };
