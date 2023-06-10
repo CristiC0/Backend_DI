@@ -1,11 +1,13 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'prisma/prisma.service';
 import { Role } from 'src/auth/role.enum';
 import { UpdateUserDto } from './dto/update-user';
 import { AuthService } from 'src/auth/auth.service';
+import { randomInt } from 'crypto';
 
 @Injectable()
 export class UsersService {
+  logger = new Logger(UsersService.name);
   constructor(
     private prisma: PrismaService,
     private authService: AuthService,

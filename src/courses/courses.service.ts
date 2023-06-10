@@ -36,6 +36,16 @@ export class CoursesService {
   }
 
   async findAll() {
+    (await this.prisma.course.findMany()).forEach(async (course) => {
+      // if (!course.description || !course.content)
+      await this.prisma.course.update({
+        where: { id: course.id },
+        data: {
+          description: '	Short descrition about course...',
+          content: 'Main content of what the course entails...',
+        },
+      });
+    });
     return await this.prisma.course.findMany({
       include: { teachers: { select: { teacher: true } } },
     });

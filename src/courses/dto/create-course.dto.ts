@@ -15,6 +15,11 @@ export class CreateCourseDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
+  public acronym: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
   public description: string;
 
   @ApiProperty()

@@ -8,7 +8,7 @@ import {
 import { ApiProperty } from '@nestjs/swagger';
 const nameRegex = /^[\w- ]*$/;
 
-const usernameRegex = /^[\w\d]*$/;
+const usernameRegex = /^[\w\d ]*$/;
 const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
 const roleRegex = /^ADMIN|TEACHER|USER$/;
 
