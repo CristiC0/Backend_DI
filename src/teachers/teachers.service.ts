@@ -85,7 +85,7 @@ export class TeachersService {
       .findUnique({
         where: { id },
         include: {
-          courses: { select: { course: { select: { name: true } } } },
+          courses: { select: { course: true } },
           user: { select: { username: true, lastName: true, firstName: true } },
         },
       })
