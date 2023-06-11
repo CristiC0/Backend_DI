@@ -144,7 +144,7 @@ export class UploadController {
     file: Express.Multer.File,
   ) {
     return {
-      photo: `http://localhost:3000/courses/news/${file.filename}`,
+      photo: `http://localhost:3000/images/courses/${file.filename}`,
     };
   }
 }
